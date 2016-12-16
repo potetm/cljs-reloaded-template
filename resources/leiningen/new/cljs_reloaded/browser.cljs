@@ -1,11 +1,9 @@
-(ns dev.user
+(ns {{browser-ns}}
   (:require [cljs.test :as test]
             [com.stuartsierra.component :as component]
             [weasel.repl :as repl]
             [{{main-ns}}-test :as tc]
             [{{main-ns}} :as core]))
-
-(enable-console-print!)
 
 (def system nil)
 
@@ -22,8 +20,9 @@
   (set! system (dev-system)))
 
 (defn with-prev-state []
-  (set! system (assoc (dev-system)
-                      :app-state (:last-app-state state))))
+  (set! system (merge (dev-system)
+                      (when-some [las (:last-app-state state)]
+                        {:app-state las}))))
 
 (defn start []
   (set! system (component/start system)))
@@ -31,8 +30,9 @@
 (defn stop []
   (when system
     (set! system (component/stop system)))
-  (set! state (assoc state
-                     :last-app-state (:app-state system))))
+  (set! state (merge state
+                     (when-some [as (:app-state system)]
+                       {:last-app-state as}))))
 
 (defn new-start []
   (init)

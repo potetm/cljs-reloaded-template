@@ -11,7 +11,7 @@
 
 (defn build []
   (copy-index-to-target)
-  (build/build (build/inputs "src/prod/cljs")
+  (build/build (build/inputs "src/prod")
                {:main '{{main-ns}}
                 :output-to "target/public/js/{{ artifact-id }}.js"
                 :output-dir "target/public/js"
