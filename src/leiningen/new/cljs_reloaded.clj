@@ -25,7 +25,7 @@
                 ["resources/dev/index.html" (render "dev-index.html" data)]
                 ["build/cljs_repl.clj" (render "cljs_repl.clj" data)]
                 ["build/prod_build.clj" (render "cljs_prod_build.clj" data)]
-                ["src/dev/dev/user.cljs" (render "cljs_dev_cljs.cljs" data)]
+                ["src/dev/dev/user.cljs" (render "user.cljs" data)]
                 ["test/{{ main-path }}_test.cljs" (render "test.cljs" data)]
                 ["resources/prod/index.html" (render "prod-index.html" data)]
                 ["src/prod/{{ main-path }}.cljs" (render "main.cljs" data)]

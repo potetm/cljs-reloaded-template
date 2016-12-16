@@ -12,7 +12,7 @@
                  "src/dev"
                  "test"])
 
-(def dev-build-opts {:main 'dev.cljs
+(def dev-build-opts {:main 'dev.user
                      :output-to "target/public/js/{{ artifact-id }}.js"
                      :output-dir "target/public/js"
                      :asset-path "js"
@@ -33,9 +33,9 @@
          (apply concat (merge {:analyze-path cljs-paths
                                :special-fns (ti/special-fns
                                               :source-dirs cljs-paths
-                                              :state 'dev.cljs/state
-                                              :before 'dev.cljs/stop
-                                              :after 'dev.cljs/resume)}
+                                              :state 'dev.user/state
+                                              :before 'dev.user/stop
+                                              :after 'dev.user/resume)}
                               dev-build-opts))))
 
 (defn stop-repl-server []

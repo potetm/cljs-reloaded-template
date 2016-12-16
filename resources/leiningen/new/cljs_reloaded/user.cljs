@@ -1,4 +1,4 @@
-(ns dev.cljs
+(ns dev.user
   (:require [cljs.test :as test]
             [com.stuartsierra.component :as component]
             [weasel.repl :as repl]
