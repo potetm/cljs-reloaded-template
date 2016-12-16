@@ -1,4 +1,4 @@
-(defproject cljs-reloaded/lein-template "0.1.0-SNAPSHOT"
+(defproject cljs-reloaded/lein-template "0.1.1"
   :description "Easily start a new cljs project with reloading."
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
