@@ -3,6 +3,7 @@
             [cljs.build.api :as build]
             [cljs.repl.node :as node]
             [clojure.java.io :as io]
+            [clojure.tools.namespace.repl :as r]
             [com.potetm.tire-iron :as ti]
             [prod-build :as prod]
             [weasel.repl.server :as wserver]
@@ -23,12 +24,20 @@
    :verbose false
    :parallel-build true})
 
+;; Piggieback adds things to this namespace. Reloading messes it up.
+;; You can remove this if you're only ever going to use one repl type
+;; (i.e. just a browser repl or just a node repl).
+(defn reset-piggieback []
+  (alter-var-root #'pb/repl-env-ctors (constantly (atom {})))
+  (r/refresh-all))
+
 (defn browser-build []
   (build/build (apply build/inputs browser-paths)
                (merge {:main '{{browser-ns}}}
                       browser-build-opts)))
 
 (defn browser-repl []
+  (reset-piggieback)
   (apply pb/cljs-repl (weasel/repl-env :src (apply build/inputs browser-paths)
                                        :working-dir "target/cljs-repl")
          (apply concat (merge {:main '{{browser-ns}}
@@ -53,6 +62,7 @@
                {:output-dir "target/public/js"}))
 
 (defn node-repl []
+  (reset-piggieback)
   (apply pb/cljs-repl (node/repl-env)
          (apply concat (merge {:output-dir "target/public/js"
                                :analyze-path node-paths
