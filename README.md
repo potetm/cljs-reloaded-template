@@ -1,6 +1,15 @@
 # cljs-reloaded
 A Leiningen template for kick-starting a reloaded cljs app.
 
+# Goals
+1. Make it easy to get a no-magic ClojureScript project with a REPL started.
+2. Make it easy to use the [Reloaded Workflow](http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded) in ClojureScript.
+
+tire-iron was created to facilitate the Reloaded Workflow. However, the barrier
+to getting a ClojureScript REPL up and running is still rather high. This project
+is an attempt to delay the need to learn about that complexity, while simultaneously
+refusing to hide complexity from you in the long run.
+
 # Provided functionality
 * A default clojure namespace (`build/user.clj`) with a bunch of utility functions, including:
   * `(fresh-browser-repl)`: Cleans, builds, and starts a repl
@@ -11,17 +20,17 @@ A Leiningen template for kick-starting a reloaded cljs app.
 * A `browser.user` ClojureScript namespace with all of your reloaded functions plus `(run-tests)`
 * A `node.user` ClojureScript namespace with all of your reloaded functions plus `(run-tests)`
 * A build script `bin/build-cljs`
-* Test namespaces are automatically added to the REPLs, so you can run your tests.
+* Test namespaces are added to the REPLs by default
 
 # Example Usage
-```
+```sh
 lein new cljs-reloaded my.group/my-awesome-project
 cd my-awesome-project/
 lein repl
 ```
 
-Now in the repl:
-```
+Now an example REPL session:
+```clj
 user=> (fresh-browser-repl)
 Navigate to  file:/private/tmp/my-awesome-project/target/public/index.html
 :reloading (prod-build user)
