@@ -1,4 +1,4 @@
-(defproject cljs-reloaded/lein-template "0.4.0"
+(defproject cljs-reloaded/lein-template "0.4.1"
   :description "Easily start a new cljs project with reloading."
   :url "https://github.com/potetm/cljs-reloaded-template"
   :license {:name "Eclipse Public License"
