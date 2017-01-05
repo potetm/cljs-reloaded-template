@@ -24,20 +24,12 @@
    :verbose false
    :parallel-build true})
 
-;; Piggieback adds things to this namespace. Reloading messes it up.
-;; You can remove this if you're only ever going to use one repl type
-;; (i.e. just a browser repl or just a node repl).
-(defn reset-piggieback []
-  (alter-var-root #'pb/repl-env-ctors (constantly (atom {})))
-  (r/refresh-all))
-
 (defn browser-build []
   (build/build (apply build/inputs browser-paths)
                (merge {:main '{{browser-ns}}}
                       browser-build-opts)))
 
 (defn browser-repl []
-  (reset-piggieback)
   (apply pb/cljs-repl (weasel/repl-env :src (apply build/inputs browser-paths)
                                        :working-dir "target/cljs-repl")
          (apply concat (merge {:main '{{browser-ns}}
@@ -62,7 +54,6 @@
                {:output-dir "target/public/js"}))
 
 (defn node-repl []
-  (reset-piggieback)
   (apply pb/cljs-repl (node/repl-env)
          (apply concat (merge {:output-dir "target/public/js"
                                :analyze-path node-paths
@@ -95,6 +86,7 @@
 
 (defn fresh-browser-repl []
   (let [idx (target-index)]
+    (r/refresh)
     (clean)
     (browser-build)
     (copy-index-to-target idx)
@@ -102,6 +94,7 @@
     (browser-repl)))
 
 (defn fresh-node-repl []
+  (r/refresh)
   (clean)
   (node-build)
   (node-repl))

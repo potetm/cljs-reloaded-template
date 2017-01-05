@@ -5,9 +5,13 @@
 
 (def render (lt/renderer "cljs-reloaded"))
 
+(defn munge-ns [n]
+  (str/replace n "-" "_"))
+
 (defn cljs-reloaded [full-name & [install-dir]]
   (let [group-id (lt/group-name full-name)
         artifact-id (lt/project-name full-name)
+        main-ns (lt/sanitize-ns full-name)
         browser-ns 'browser.user
         node-ns 'node.user
         browser-ns-path (str (lt/name-to-path browser-ns) ".cljs")
@@ -17,8 +21,10 @@
               :full-name full-name
               :group-id group-id
               :artifact-id artifact-id
-              :main-ns (lt/sanitize-ns full-name)
+              :main-ns main-ns
               :main-path (lt/name-to-path full-name)
+              :main-ns-munged (munge-ns main-ns)
+              :browser-ns-munged (munge-ns browser-ns)
               :year (lt/year)
               :browser-ns browser-ns
               :node-ns node-ns}]

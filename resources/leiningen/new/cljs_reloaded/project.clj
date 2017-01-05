@@ -15,6 +15,6 @@
                                   "test"]
                    :resource-paths ["resources/dev"]
                    :dependencies [[com.cemerick/piggieback "0.2.1"]
-                                  [com.potetm/tire-iron "0.2.1"]
+                                  [com.potetm/tire-iron "0.3.0"]
                                   [weasel "0.7.0"]]
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}})
